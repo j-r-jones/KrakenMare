@@ -17,7 +17,7 @@ FROM openjdk:8-jdk
 # requirement for wait-for
 RUN apt update && apt install -y netcat
 
-RUN wget https://downloads.apache.org/druid/0.17.1/apache-druid-0.17.1-bin.tar.gz \
+RUN wget https://archive.apache.org/dist/druid/0.17.1/apache-druid-0.17.1-bin.tar.gz \
     && tar -xzf apache-druid-0.17.1-bin.tar.gz \
     && mv apache-druid-0.17.1 /opt/druid/
 
