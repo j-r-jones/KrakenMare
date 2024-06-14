@@ -1,6 +1,9 @@
 # (C) Copyright 2020 Hewlett Packard Enterprise Development LP.
 
 FROM ubuntu:18.04
+
+RUN echo "test-tools"
+
 # Test env deps
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get update && apt-get install -y bash strace tcpdump wget curl bind9-host
@@ -13,7 +16,8 @@ RUN wget --no-check-certificate https://github.com/akheron/jansson/archive/v2.12
 RUN mv /jansson-2.12 /jansson && cd /jansson && autoreconf -fi ; ./configure && make && make install
 
 # Yajl json library
-RUN cd / && wget --no-check-certificate https://github.com/lloyd/yajl/archive/2.1.0.tar.gz -O - | tar xzf - \
+#RUN cd / && wget --no-check-certificate https://github.com/lloyd/yajl/archive/2.1.0.tar.gz -O - | tar xzf - \
+RUN cd / && wget --no-check-certificate https://github.com/lloyd/yajl/archive/refs/tags/2.1.0.tar.gz -O - | tar xzf - \
     && mv /yajl-2.1.0 /yajl && cd /yajl && ./configure && make && make install
 
 # Build wait for tool
