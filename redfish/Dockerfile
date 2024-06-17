@@ -14,6 +14,8 @@
 
 FROM ubuntu:18.04
 
+RUN echo "redfish"
+
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y wget gnupg apt-utils python3-pip perl-modules netcat
 

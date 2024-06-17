@@ -14,6 +14,11 @@
 
 FROM confluentinc/cp-enterprise-kafka:5.4.0
 #FROM confluentinc/cp-server:5.4.1-1-deb8
+
+RUN echo 'FOOO'
+RUN cat /etc/apt/sources.list
+RUN echo 'FOOO'
+
 #A requirement for wait-for
 RUN apt-get --allow-unauthenticated install -y sed
 RUN sed -i 's/\/debian\./\/archive\.debian\./g' /etc/apt/sources.list

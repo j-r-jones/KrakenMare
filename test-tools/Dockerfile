@@ -35,7 +35,9 @@ RUN apt-get update && apt-get install -y confluent-community-2.12 librdkafka-dev
 # Add avrocat to work at commandline with avro files
 RUN apt-get update && apt-get install -y python3 python3-pip git libavro-dev
 RUN pip3 install colorama
-RUN cd /usr/src && git clone https://github.com/simonwahlgren/avrocat.git && cd avrocat && pip3 install -e .
+#RUN cd /usr/src && git clone https://github.com/simonwahlgren/avrocat.git && cd avrocat && pip3 install -e .
+# My fork of the repository so that I can control the versions in the requirements.txt
+RUN cd /usr/src && git clone https://github.com/j-r-jones/avrocat.git && cd avrocat && python3 -m pip install -r requirements.txt &&  pip3 install -e .
 
 # Bring in the environment of the simulator so we can play with it
 RUN pip3 install avro-python3

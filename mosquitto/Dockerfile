@@ -14,6 +14,8 @@
 
 FROM eclipse-mosquitto:1.6.9
 
+RUN echo "eclipse-mosquitto"
+
 COPY mosquitto.conf /mosquitto/config/mosquitto.conf
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]

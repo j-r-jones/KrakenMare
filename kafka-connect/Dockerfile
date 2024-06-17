@@ -1,5 +1,6 @@
 FROM confluentinc/cp-kafka-connect:5.4.0
 
+RUN echo "kafka-connect"
 
 RUN apt-get --allow-unauthenticated install -y sed
 RUN sed -i 's/\/debian\./\/archive\.debian\./g' /etc/apt/sources.list

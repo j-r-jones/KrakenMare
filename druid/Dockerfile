@@ -14,6 +14,8 @@
 
 FROM openjdk:8-jdk
 
+RUN echo "openjdk"
+
 # requirement for wait-for
 RUN apt update && apt install -y netcat
 

@@ -15,6 +15,8 @@
 
 FROM ubuntu:18.04 as faninbuild
 
+RUN echo "faninbuild"
+
 RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common
 RUN apt-get update && apt-get install -y netcat wget python3.7 python3.7-dev
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
@@ -40,8 +42,8 @@ COPY --from=faninbuild /tmp/wait-for /tmp/wait-for
 COPY --from=faninbuild /usr/local /usr/local/
 
 RUN apt-get update && apt-get install -y librdkafka-dev
-
-RUN pip3 install paho-mqtt confluent-kafka configparser colorlog python-schema-registry-client faust
+RUN python3 -m pip install multidict attr typing_extensions
+RUN python3 -m pip install paho-mqtt confluent-kafka configparser colorlog python-schema-registry-client faust
 
 COPY ./fanin/FanIn.py ./fanin/entrypoint.sh fanin/version.py fanin/FanIn.cfg fanin/KrakenMareLogger.py /fanin/
 COPY ./agent-python-module/agentcommon.py /fanin
