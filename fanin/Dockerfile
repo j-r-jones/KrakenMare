@@ -42,7 +42,7 @@ COPY --from=faninbuild /tmp/wait-for /tmp/wait-for
 COPY --from=faninbuild /usr/local /usr/local/
 
 RUN apt-get update && apt-get install -y librdkafka-dev
-RUN python3 -m pip install multidict attr typing_extensions
+RUN python3 -m pip install multidict attr typing_extensions yarl
 RUN python3 -m pip install paho-mqtt confluent-kafka configparser colorlog python-schema-registry-client faust
 
 COPY ./fanin/FanIn.py ./fanin/entrypoint.sh fanin/version.py fanin/FanIn.cfg fanin/KrakenMareLogger.py /fanin/
