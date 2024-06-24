@@ -21,8 +21,12 @@ RUN cd /tmp/ && wget --no-check-certificate https://api.github.com/repos/eficode
 RUN mv /tmp/eficode-wait-for-*/wait-for /tmp/
 
 RUN apt update && apt install -y python3 python3-pip curl jq
-RUN python3 -m pip install multidict attr typing_extensions yarl
-RUN pip3 install paho-mqtt configparser python-schema-registry-client faust
+
+RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
+	python3 -m pip install attrs aiosignal && \
+	python3 -m pip install aiohttp && \
+	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
+
 
 # this is image MUST be built from the upper directory (docker build -f simulator/Dockerfile .) to access agentcommon.py
 
