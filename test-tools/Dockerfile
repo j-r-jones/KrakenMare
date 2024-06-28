@@ -40,8 +40,10 @@ RUN pip3 install colorama
 RUN cd /usr/src && git clone https://github.com/j-r-jones/avrocat.git && cd avrocat && python3 -m pip install -r requirements.txt &&  pip3 install -e .
 
 # Bring in the environment of the simulator so we can play with it
-RUN pip3 install avro-python3
-RUN pip3 install paho-mqtt configparser python-schema-registry-client confluent-kafka
+COPY ./requirements.txt .
+RUN python3 -m pip install -r requirements.txt
+#RUN pip3 install avro-python3
+#RUN pip3 install paho-mqtt configparser python-schema-registry-client confluent-kafka
 
 # mosquitto ppa used because in 18.04 the version is old
 RUN apt-add-repository ppa:mosquitto-dev/mosquitto-ppa
