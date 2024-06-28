@@ -20,7 +20,7 @@ RUN echo "faninbuild"
 RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common
 RUN apt-get update && apt-get install -y netcat wget python3.7 python3.7-dev
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
-RUN apt-get update && apt-get install -y python3-pip
+RUN apt-get update
 RUN cd /tmp/ && wget --no-check-certificate https://api.github.com/repos/eficode/wait-for/tarball/828386460d138e418c31a1ebf87d9a40f5cedc32 -O - | tar xzf -
 RUN mv /tmp/eficode-wait-for-*/wait-for /tmp/
 
@@ -43,10 +43,12 @@ COPY --from=faninbuild /usr/local /usr/local/
 
 RUN apt-get update && apt-get install -y librdkafka-dev
 
-RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
-	python3 -m pip install attrs aiosignal && \
-	python3 -m pip install aiohttp && \
-	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
+COPY requirements.txt .
+RUN python3 -m pip install -r requirements.txt
+#RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
+#	python3 -m pip install attrs aiosignal && \
+#	python3 -m pip install aiohttp && \
+#	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
 
 COPY ./fanin/FanIn.py ./fanin/entrypoint.sh fanin/version.py fanin/FanIn.cfg fanin/KrakenMareLogger.py /fanin/
 COPY ./agent-python-module/agentcommon.py /fanin
