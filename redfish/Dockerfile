@@ -31,10 +31,9 @@ RUN perl -pi -e 's|ftp://|http://|' /etc/apt/sources.list.d/python-redfish.sourc
 RUN wget -qO - http://ftp.mondorescue.org/ubuntu/18.04/python-redfish.pubkey | apt-key add -
 RUN apt-get update -o Acquire::http::No-Cache=True && DEBIAN_FRONTEND=noninteractive apt-get install -y python3-redfish
 
-RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
-	python3 -m pip install attrs aiosignal && \
-	python3 -m pip install aiohttp && \
-	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
+
+COPY ./redfish/requirements.txt .
+RUN python3 -m pip install -r requirements.txt
 
 COPY ./redfish/RedfishAgent.py ./redfish/RedfishAgent.cfg ./redfish/entrypoint.sh ./redfish/version.py ./redfish/start.sh /redfish/
 

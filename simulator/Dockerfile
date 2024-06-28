@@ -22,11 +22,8 @@ RUN mv /tmp/eficode-wait-for-*/wait-for /tmp/
 
 RUN apt update && apt install -y python3 python3-pip curl jq
 
-RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
-	python3 -m pip install attrs aiosignal && \
-	python3 -m pip install aiohttp && \
-	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
-
+COPY ./simulator/requirements.txt .
+RUN python3 -m pip install -r requirements.txt
 
 # this is image MUST be built from the upper directory (docker build -f simulator/Dockerfile .) to access agentcommon.py
 

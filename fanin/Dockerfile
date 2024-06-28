@@ -45,10 +45,6 @@ RUN apt-get update && apt-get install -y librdkafka-dev
 
 COPY ./fanin/requirements.txt .
 RUN python3 -m pip install -r requirements.txt
-#RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
-#	python3 -m pip install attrs aiosignal && \
-#	python3 -m pip install aiohttp && \
-#	python3 -m pip install paho-mqtt configparser python-schema-registry-client faust
 
 COPY ./fanin/FanIn.py ./fanin/entrypoint.sh fanin/version.py fanin/FanIn.cfg fanin/KrakenMareLogger.py /fanin/
 COPY ./agent-python-module/agentcommon.py /fanin
