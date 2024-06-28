@@ -43,7 +43,7 @@ COPY --from=faninbuild /usr/local /usr/local/
 
 RUN apt-get update && apt-get install -y librdkafka-dev
 
-COPY requirements.txt .
+COPY ./fanin/requirements.txt .
 RUN python3 -m pip install -r requirements.txt
 #RUN python3 -m pip install typing_extensions yarl async_timeout idna_ssl charset_normalizer && \
 #	python3 -m pip install attrs aiosignal && \
