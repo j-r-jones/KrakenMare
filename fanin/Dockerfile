@@ -17,8 +17,8 @@ FROM ubuntu:18.04 as faninbuild
 
 RUN echo "faninbuild"
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common
-RUN apt-get install -y netcat wget python3.7 python3.7-dev
+RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common \
+    && apt-get install -y netcat wget python3.7 python3.7-dev
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
 RUN cd /tmp/ && wget --no-check-certificate https://api.github.com/repos/eficode/wait-for/tarball/828386460d138e418c31a1ebf87d9a40f5cedc32 -O - | tar xzf -
 RUN mv /tmp/eficode-wait-for-*/wait-for /tmp/
@@ -29,15 +29,14 @@ RUN apt-get install -y gcc g++ make cmake autoconf libtool wget libavro-dev libc
 # Create container for fanin using ubuntu 18.04 and copy over build features as needed
 FROM ubuntu:18.04
 
-RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common
-RUN apt-get install -y netcat wget python3.7 python3.7-dev curl jq
+RUN apt-get update && apt-get upgrade -y && apt-get -y install software-properties-common \
+    && apt-get install -y netcat wget python3.7 python3.7-dev curl jq
 RUN wget -qO - https://packages.confluent.io/deb/5.4/archive.key | apt-key add -
 RUN add-apt-repository "deb [arch=amd64] https://packages.confluent.io/deb/5.4 stable main"
 RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.7 1
-RUN apt-get install -y python3-pip
-
 # Runtime deps from the build deps above
-RUN apt-get install -y libavro23 libcurl3-gnutls zlib1g libssl1.1 libzstd1 netcat libsasl2-2 software-properties-common
+RUN apt-get update && apt-get install -y python3-pip \
+    && apt-get install -y libavro23 libcurl3-gnutls zlib1g libssl1.1 libzstd1 netcat libsasl2-2 software-properties-common
 COPY --from=faninbuild /tmp/wait-for /tmp/wait-for
 COPY --from=faninbuild /usr/local /usr/local/
 
