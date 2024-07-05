@@ -58,7 +58,7 @@ RUN mv linux_amd64/mqtt-bench /tmp/
 RUN apt-get install -y npm
 RUN npm install mqtt-benchmark -g
 
-COPY ./zookeeper-ready.sh ./km-scaling-test-rate.sh ./check-pipeline.sh ./client-plain.conf ./scaling-test.sh ./scaling-test-setup.sh ./print-schemaregistry.sh ./mqtt-bench.sh ./mqtt.batch /tmp/
+COPY ./druid_query.json ./druid_query2.json ./query_druid.sh ./zookeeper-ready.sh ./km-scaling-test-rate.sh ./check-pipeline.sh ./client-plain.conf ./scaling-test.sh ./scaling-test-setup.sh ./print-schemaregistry.sh ./mqtt-bench.sh ./mqtt.batch /tmp/
 
 ENV LD_LIBRARY_PATH /usr/local/lib
 
