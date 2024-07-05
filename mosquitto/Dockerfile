@@ -12,10 +12,13 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-FROM eclipse-mosquitto:1.6.9
+FROM eclipse-mosquitto:1.6.9 AS mosquitto
 
-RUN echo "eclipse-mosquitto"
+# Make sure we have cgroup support
+VOLUME [ "/sys/fs/cgroup" ]
 
 COPY mosquitto.conf /mosquitto/config/mosquitto.conf
+RUN mkdir -p /mosquitto/log
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["/usr/sbin/mosquitto", "-c", "/mosquitto/config/mosquitto.conf"]
