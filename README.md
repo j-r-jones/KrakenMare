@@ -1,4 +1,4 @@
-KrakenMare is a containerized software stack providing a versatile data pipeline to monitor HPC clusters.
+KrakenMare is a proof of concept.  It is a containerized software stack providing a versatile data pipeline to monitor HPC clusters.
 The source code is provided under the Apache License version 2.0 (See [LICENSE](LICENSE) file at the root of the tree)
 The data is provided under the Creative Common 0 License version 1.0 (See [LICENSE.data](LICENSE.data) file at the root of the tree)
 
